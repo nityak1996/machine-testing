@@ -1,9 +1,16 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .photobooth {
   text-align: center;
   position: relative;
   height: 100vh;
   width: 100%;
- background-size: contain;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -17,7 +24,7 @@
 
 .home-button {
   position: absolute;
-  top: 60px; /* Adjust as needed */
+  top: 60px;
   left: 58%;
   transform: translateX(-50%);
   padding: 10px 20px;
@@ -41,6 +48,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 .frame {
@@ -54,13 +62,14 @@
 }
 
 .webcam {
-  width: 90%;
-  height: 60%;
-  object-fit: cover;
+  width: 280px;
+  height: 380px;
+  object-fit: fill;
 }
+
 .right-img {
   position: absolute;
-  right: 130px; /* Adjust as needed */
+  right: 10vw;
   top: 50%;
   transform: translateY(-50%);
   width: 300px;
@@ -71,12 +80,10 @@
 .buttons-left {
   position: absolute;
   top: 30%;
-  left: 20px;
-  transform: translateX(-50%);
+  left: 17vw;
   display: flex;
   flex-direction: column;
   z-index: 2;
-  margin-left: 280px;
 }
 
 button {
@@ -84,4 +91,170 @@ button {
   margin: 5px 0;
   font-size: 16px;
   cursor: pointer;
+}
+
+.box {
+  position: relative;
+  width: 189px;
+  height: 30px;
+  overflow: hidden;
+  border: none;
+  background-color: whitesmoke;
+  color: #eb1878;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-top-left-radius: 20px;
+  cursor: pointer;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 0 10px rgb(104, 134, 218);
+}
+
+.text-button {
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.buttons-left .box {
+  margin-bottom: 10px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.box:hover {
+  background-color: white;
+  color: #eb1878;
+}
+
+/* Styles for the horizontal line */
+.horizontal-line {
+  position: absolute;
+  margin-left: 90px;
+  margin-top: 2px;
+  left: 0;
+  width: 100%;
+  top: calc(
+    38% + 120px
+  ); /* Adjust based on the height and position of the buttons */
+  left: 10vw; /* Match the left position of the buttons */
+  width: calc(
+    80% - 18vw - 12vw
+  ); /* Calculate the width to stretch to the right image */
+  height: 1px;
+  background-color: white;
+  z-index: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .camera-container {
+    width: 250px;
+    height: 333px;
+  }
+
+  .right-img {
+    width: 250px;
+  }
+
+  .home-button {
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 992px) {
+  .camera-container {
+    width: 200px;
+    height: 267px;
+  }
+
+  .right-img {
+    width: 200px;
+  }
+
+  .home-button {
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .camera-container {
+    width: 150px;
+    height: 200px;
+  }
+
+  .right-img {
+    width: 150px;
+  }
+
+  .home-button {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 576px) {
+  .camera-container {
+    width: 120px;
+    height: 160px;
+  }
+
+  .right-img {
+    width: 120px;
+  }
+
+  .home-button {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 400px) {
+  .camera-container {
+    width: 100px;
+    height: 133px;
+  }
+
+  .right-img {
+    width: 100px;
+  }
+
+  .buttons-left {
+    left: 5vw;
+  }
+
+  .horizontal-line {
+    left: 5vw;
+    width: calc(100% - 5vw - 10vw);
+  }
+
+  .home-button {
+    font-size: 12px;
+    padding: 5px 10px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  button {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+
+  .box {
+    width: 150px;
+    height: 25px;
+  }
+
+  .text-button {
+    font-size: 1rem;
+  }
 }
