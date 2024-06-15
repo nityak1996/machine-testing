@@ -1,54 +1,61 @@
-body,
-html {
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
+  box-sizing: border-box;
 }
 
 .photobooth {
   text-align: center;
   position: relative;
-  height: 100vh;
-  width: 100%;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-image: url("./images/bg.jpg");
+  min-height: 100vh;
+  width: 100vw;
+  background: url("./images/bg.jpg") center/cover no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: black;
+  overflow: hidden;
+}
+
+.photobooth::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
 .home-button {
+  gap: 2px;
   position: absolute;
-  top: 60px;
-  left: 58%;
+  top: 65px;
+  left: 59%;
   transform: translateX(-50%);
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
   color: white;
   border: none;
   border-radius: 5px;
   display: flex;
   align-items: center;
-}
-
-.home-button i {
-  margin-right: 5px;
+  z-index: 3;
+  transition: all 0.3s ease;
 }
 
 .camera-container {
   position: relative;
-  width: 300px;
-  height: 400px;
+  width: 80vw;
+  max-width: 300px;
+  height: auto;
+  aspect-ratio: 3 / 4;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 999;
 }
 
 .frame {
@@ -58,13 +65,12 @@ html {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
 }
 
 .webcam {
-  width: 280px;
-  height: 380px;
-  object-fit: fill;
+  width: 90%;
+  min-height: 95%;
+  object-fit: cover;
 }
 
 .right-img {
@@ -72,40 +78,41 @@ html {
   right: 10vw;
   top: 50%;
   transform: translateY(-50%);
-  width: 300px;
-  height: 100%;
+  max-width: 300px;
+  min-height: 100%;
+  width: 20vw;
+  height: auto;
   object-fit: cover;
+  z-index: 2;
 }
 
 .buttons-left {
   position: absolute;
-  top: 30%;
-  left: 17vw;
+  top: 50%;
+  left: 14vw;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  z-index: 2;
-}
-
-button {
-  padding: 10px 20px;
-  margin: 5px 0;
-  font-size: 16px;
-  cursor: pointer;
+  z-index: 3;
 }
 
 .box {
   position: relative;
-  width: 189px;
-  height: 30px;
+  width: 16vw;
+  max-width: 100%;
+  height: auto;
+  padding: 1vw 2vw;
   overflow: hidden;
   border: none;
-  background-color: whitesmoke;
-  color: #eb1878;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  border-top-left-radius: 20px;
-  cursor: pointer;
-  border-bottom-right-radius: 20px;
+  background-color: #ffdad6;
+  color: #ff0872;
+  border-top-left-radius: 3vw;
+  border-bottom-right-radius: 3vw;
   box-shadow: 0 0 10px rgb(104, 134, 218);
+  font-size: 2.1vw;
+  font-weight: 700;
+  text-transform: uppercase;
+  z-index: 3;
 }
 
 .text-button {
@@ -117,11 +124,11 @@ button {
 
 .buttons-left .box {
   margin-bottom: 10px;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  max-width: 100%;
 }
 
 .box:hover {
@@ -129,119 +136,107 @@ button {
   color: #eb1878;
 }
 
-/* Styles for the horizontal line */
-.horizontal-line {
-  position: absolute;
-  margin-left: 90px;
-  margin-top: 2px;
-  left: 0;
-  width: 100%;
-  top: calc(
-    38% + 120px
-  ); /* Adjust based on the height and position of the buttons */
-  left: 10vw; /* Match the left position of the buttons */
-  width: calc(
-    80% - 18vw - 12vw
-  ); /* Calculate the width to stretch to the right image */
+.divider {
   height: 1px;
-  background-color: white;
-  z-index: 1;
+  background-color: #ffdad6;
+  position: relative;
+  width: 56vw;
+
+  bottom: 12px;
+  z-index: -1;
 }
 
-/* Responsive styles */
 @media (max-width: 1200px) {
   .camera-container {
-    width: 250px;
-    height: 333px;
+    max-width: 250px;
   }
 
   .right-img {
-    width: 250px;
+    max-width: 250px;
   }
 
   .home-button {
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 30px;
+  }
+
+  .buttons-left {
+    left: 10vw;
   }
 }
 
 @media (max-width: 992px) {
   .camera-container {
-    width: 200px;
-    height: 267px;
+    max-width: 200px;
   }
 
   .right-img {
-    width: 200px;
+    max-width: 200px;
   }
 
   .home-button {
     top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .buttons-left {
+    left: 8vw;
   }
 }
 
 @media (max-width: 768px) {
   .camera-container {
-    width: 150px;
-    height: 200px;
+    max-width: 150px;
   }
 
   .right-img {
-    width: 150px;
+    max-width: 150px;
   }
 
   .home-button {
     top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .buttons-left {
+    left: 6vw;
   }
 }
 
 @media (max-width: 576px) {
   .camera-container {
-    width: 120px;
-    height: 160px;
+    max-width: 120px;
   }
 
   .right-img {
-    width: 120px;
+    max-width: 120px;
   }
 
   .home-button {
     top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-@media (max-width: 400px) {
-  .camera-container {
-    width: 100px;
-    height: 133px;
-  }
-
-  .right-img {
-    width: 100px;
+    font-size: 0.7rem;
+    padding: 5px 10px;
   }
 
   .buttons-left {
     left: 5vw;
   }
+}
 
-  .horizontal-line {
-    left: 5vw;
-    width: calc(100% - 5vw - 10vw);
+@media (max-width: 400px) {
+  .camera-container {
+    max-width: 100px;
+  }
+
+  .right-img {
+    max-width: 100px;
   }
 
   .home-button {
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 0.6rem;
+    padding: 4px 8px;
     top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   button {
@@ -250,7 +245,7 @@ button {
   }
 
   .box {
-    width: 150px;
+    max-width: 150px;
     height: 25px;
   }
 

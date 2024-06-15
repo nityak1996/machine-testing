@@ -3,6 +3,8 @@ import Webcam from "react-webcam";
 import "./Photobooth.css";
 import frame from "./images/frame.png";
 import rightImg from "./images/right-img.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const Photobooth = () => {
   const webcamRef = useRef(null);
@@ -69,42 +71,54 @@ const Photobooth = () => {
   };
 
   return (
-    <div className="photobooth">
-      <span className="home-button">
-        <i className="fas fa-home"></i> Home
-      </span>
-      <div className="camera-container">
-        {!capturedImage ? (
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            className="webcam"
-          />
-        ) : (
-          <img src={capturedImage} alt="Captured" className="webcam" />
-        )}
-        <img src={frame} alt="Frame" className="frame" />
+    <div>
+      <div className="home-button">
+        <FontAwesomeIcon icon={faHouse} /> Home
       </div>
-      <div>
-        <img src={rightImg} alt="rightImg" className="right-img" />
+      <div className="photobooth">
+        <div className="camera-container">
+          {!capturedImage ? (
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              className="webcam"
+            />
+          ) : (
+            <img src={capturedImage} alt="Captured" className="webcam" />
+          )}
+          <img src={frame} alt="Frame" className="frame" />
+        </div>
+        <div>
+          <img src={rightImg} alt="rightImg" className="right-img" />
+        </div>
+        <div className="buttons-left">
+          <div>
+            <button className="box" onClick={capture}>
+              <p className="text-button">CAPTURE</p>
+            </button>
+            <div className="divider"></div>
+          </div>
+          <div>
+            <button className="box" onClick={retake}>
+              <p className="text-button">RETAKE</p>
+            </button>
+            <div className="divider"></div>
+          </div>
+          <div>
+            <button className="box" onClick={save}>
+              <p className="text-button">SAVE</p>
+            </button>
+            <div className="divider"></div>
+          </div>
+          <div>
+            <button className="box">
+              <p className="text-button">POST</p>
+            </button>
+            <div className="divider"></div>
+          </div>
+        </div>
       </div>
-      <div className="buttons-left">
-        <button className="box" onClick={capture}>
-          <p className="text-button">CAPTURE</p>
-        </button>
-        <div className="horizontal-line"></div>
-        <button className="box" onClick={retake}>
-          <p className="text-button">RETAKE</p>
-        </button>
-        <button className="box" onClick={save}>
-          <p className="text-button">SAVE</p>
-        </button>
-        <button className="box ">
-          <p className="text-button">POST</p>
-        </button>
-      </div>
-      <div className="horizontal-line"></div>
     </div>
   );
 };
