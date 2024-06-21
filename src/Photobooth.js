@@ -4,11 +4,12 @@ import "./Photobooth.css";
 import frame from "./images/frame.png";
 import rightImg from "./images/right-img.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faCamera, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 
 const Photobooth = () => {
   const webcamRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [isCameraOn, setIsCameraOn] = useState(false);
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -19,6 +20,10 @@ const Photobooth = () => {
     setCapturedImage(null);
   };
 
+  const toggleCamera = () => {
+    setIsCameraOn((prev) => !prev);
+  };
+
   const save = () => {
     if (capturedImage) {
       const canvas = document.createElement("canvas");
@@ -26,8 +31,8 @@ const Photobooth = () => {
       const img = new Image();
       const frameImg = new Image();
 
-      const frameWidth = 600;
-      const frameHeight = 800;
+      const frameWidth = 1100;
+      const frameHeight = 1000;
 
       canvas.width = frameWidth;
       canvas.height = frameHeight;
@@ -77,7 +82,7 @@ const Photobooth = () => {
       </div>
       <div className="photobooth">
         <div className="camera-container">
-          {!capturedImage ? (
+          {isCameraOn && !capturedImage ? (
             <Webcam
               audio={false}
               ref={webcamRef}
@@ -85,7 +90,7 @@ const Photobooth = () => {
               className="webcam"
             />
           ) : (
-            <img src={capturedImage} alt="Captured" className="webcam" />
+            capturedImage && <img src={capturedImage} alt="Captured" className="webcam" />
           )}
           <img src={frame} alt="Frame" className="frame" />
         </div>
@@ -94,7 +99,14 @@ const Photobooth = () => {
         </div>
         <div className="buttons-left">
           <div>
-            <button className="box" onClick={capture}>
+            <button className="box" onClick={toggleCamera}>
+              <FontAwesomeIcon icon={isCameraOn ? faPowerOff : faCamera} className="camera-icon" />
+              <p className="text-button">{isCameraOn ? "TURN OFF" : "TURN ON"} </p>
+            </button>
+            <div className="divider"></div>
+          </div>
+          <div>
+            <button className="box" onClick={capture} disabled={!isCameraOn}>
               <p className="text-button">CAPTURE</p>
             </button>
             <div className="divider"></div>

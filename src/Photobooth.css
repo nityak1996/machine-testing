@@ -6,10 +6,11 @@
 
 .photobooth {
   text-align: center;
-  position: relative;
-  min-height: 100vh;
-  width: 100vw;
-  background: url("./images/bg.jpg") center/cover no-repeat;
+  position: fixed;
+/* top: 12px; */
+height: 100%;
+  width: 100%;
+  background: url("./images/bg.jpg") center/contain no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +20,7 @@
 }
 
 .photobooth::after {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -42,7 +43,7 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
-  z-index: 3;
+  z-index: 100;
   transition: all 0.3s ease;
 }
 
@@ -59,18 +60,22 @@
 }
 
 .frame {
-  position: absolute;
+  position: relative  ;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
+  z-index: 1;
 }
 
 .webcam {
+  position: absolute ;
+  top: 0;
+  bottom: 0;
   width: 90%;
   min-height: 95%;
-  object-fit: cover;
+  object-fit: cover ;
 }
 
 .right-img {
@@ -78,11 +83,11 @@
   right: 10vw;
   top: 50%;
   transform: translateY(-50%);
-  max-width: 300px;
-  min-height: 100%;
+  width: 300px;
+  height: 100%;
   width: 20vw;
-  height: auto;
-  object-fit: cover;
+
+  object-fit: fill;
   z-index: 2;
 }
 
@@ -137,10 +142,10 @@
 }
 
 .divider {
-  height: 1px;
+  height: 2px;
   background-color: #ffdad6;
   position: relative;
-  width: 56vw;
+  width: 58vw;
 
   bottom: 12px;
   z-index: -1;
@@ -213,11 +218,11 @@
     max-width: 120px;
   }
 
-  .home-button {
+ .home-button {
     top: 10px;
     font-size: 0.7rem;
     padding: 5px 10px;
-  }
+  } 
 
   .buttons-left {
     left: 5vw;
@@ -252,4 +257,7 @@
   .text-button {
     font-size: 1rem;
   }
+}
+.camera-icon {
+  margin-right: 8px;
 }
